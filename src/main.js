@@ -7,7 +7,7 @@ import { testMysqlConnection } from "./config/mysql.config.js";
 import express from "express";
 import errorHandlerMiddleware from "./middlewares/error.middleware.js";
 import authMiddleware from "./middlewares/auth.middleware.js";
-import auth_router from "./routes/auth.Router.js";
+import auth_router from "./routes/auth.router.js";
 import user_router from "./routes/user.router.js";
 import workspace_router from "./routes/workspace.router.js";
 import mailer_transporter from "./config/mailer.config.js";
