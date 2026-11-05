@@ -24,6 +24,23 @@ workspace_router.post(
 )
 
 workspace_router.get(
+    '/',
+    authMiddleware,
+    async (request, response) => {
+
+        const workspaces_list = await member_repository.getAllWorkspaceByUserId(request.user.id)
+        return response.status(200).send({
+            ok: true,
+            message: "Workspaces obtenidos",
+            status: 200,
+            data: {
+                workspaces: workspaces_list
+            }
+        })
+    }
+)
+
+workspace_router.get(
     '/:workspace_id', 
     authMiddleware,
     workspaceMiddleware([]),
@@ -40,22 +57,6 @@ workspace_router.get(
     }
 )
 
-workspace_router.get(
-    '/',
-    authMiddleware,
-    async (request, response) => {
-
-        const workspaces_list = await member_repository.getAllWorkspaceByUserId(request.user._id)
-        return response.status(200).send({
-            ok: true,
-            message: "Workspaces obtenidos",
-            status: 200,
-            data: {
-                workspaces: workspaces_list
-            }
-        })
-    }
-)
 
 workspace_router.delete(
     '/:workspace_id',
