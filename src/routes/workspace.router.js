@@ -44,14 +44,14 @@ workspace_router.get(
     '/',
     authMiddleware,
     async (request, response) => {
-        const user_id = request.user._id
-        const workspaces = await workspace_repository.getAllWorkspaceByUserId(user_id)
+
+        const workspaces_list = await member_repository.getAllWorkspaceByUserId(user_id)
         return response.status(200).send({
             ok: true,
-            message: "Workspaces obtenidos correctamente",
+            message: "Workspaces obtenidos",
             status: 200,
             data: {
-                workspaces: workspaces
+                workspaces: workspaces_list
             }
         })
     }
