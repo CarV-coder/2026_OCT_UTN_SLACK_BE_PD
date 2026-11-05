@@ -6,15 +6,14 @@ import { testMysqlConnection } from "./config/mysql.config.js";
 
 import express from "express";
 import errorHandlerMiddleware from "./middlewares/error.middleware.js";
-import authMiddleware from "./middlewares/auth.middleware.js";
 import auth_router from "./routes/auth.router.js";
 import user_router from "./routes/user.router.js";
 import workspace_router from "./routes/workspace.router.js";
 import mailer_transporter from "./config/mailer.config.js";
-import user_repository from "./repositories/user.repository.js";
 import cors from "cors";
+import ENVIRONMENT from "./config/environment.config.js";
 
-const PORT = process.env.PORT
+const PORT = ENVIRONMENT.PORT
 const app = express()
 
 /* 
@@ -37,24 +36,19 @@ app.use(async (req, res, next) => {
     }
 });
 
-
-
-
-
 /* 
 Todas las consultas que lleguen a /api/auth las manejará el auth_router
 */
 app.use('/api/auth', auth_router)
 app.use('/api/users', user_router)
-app.use('/api/workspaces', authMiddleware, workspace_router)
+app.use('/api/workspaces', workspace_router)
 
-
-app.get(
+/* app.get(
     '/api/status',
     (request, response) => {
         return response.send(['hola, les traigo paz y amor'])
     }
-)
+) */
 
 /* mailer_transporter.sendMail(
     {

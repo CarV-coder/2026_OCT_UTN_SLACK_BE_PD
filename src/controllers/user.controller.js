@@ -4,8 +4,8 @@ import ServerError from '../utils/error.util.js'
 
 export async function getUsers(request, response) {
     const user_list = await user_repository.get()
-    return response.send({
-        message: "Get users list successfully",
+    return response.status(200).send({
+        message: "Get users list",
         ok: true,
         status: 200,
         data: {
@@ -21,7 +21,7 @@ export async function getUserById(request, response) {
     if (!user) {
         throw new ServerError("User not found", 404)
     }
-    return response.send(
+    return response.status(200).send(
         {
             message: "Get user details successfully",
             status: 200,

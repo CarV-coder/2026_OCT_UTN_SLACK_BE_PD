@@ -3,8 +3,7 @@ import workspace_repository from '../repositories/workspace.repository.js'
 import member_repository from '../repositories/member.repository.js'
 import authMiddleware from '../middlewares/auth.middleware.js'
 import channel_router from './channel.router.js'
-import ServerError from '../utils/error.util.js'
-import workspaceMiddleware from '../middlewares/workspace.membership.middleware.js'
+import workspaceMiddleware from '../middlewares/workspace.middleware.js'
 import { createWorkspace } from '../controllers/workspace.controller.js'
 
 const workspace_router = express.Router()

@@ -176,7 +176,9 @@ Los JWT son objetos de JS (JSON) pasados a string (HS256) con una firma
 */
 
 export async function verifyEmail(request, response) {
+
     const { verify_email_token } = request.params
+    
     //Verificar el token
     const { email } = jwt.verify(
         verify_email_token,
@@ -187,16 +189,23 @@ export async function verifyEmail(request, response) {
 
     //Si no existe el usuario error
     if (!user_found) {
-        throw new ServerError('Usuario no encontrado', 404)
+        throw new ServerError(
+            'Usuario no encontrado',
+            404)
     }
 
     if (!user_found.activo) {
-        throw new ServerError('Usuario esta desactivado de la plataforma, contactate con soporte si consideras que esto es un error', 403)
+        throw new ServerError(
+            'Usuario esta desactivado de la plataforma, contactate con soporte si consideras que esto es un error',
+            403
+        )
     }
 
     //Si ya estas verificado deja de intentar verificarte
     if (user_found.email_verificado) {
-        throw new ServerError('Ya estas verificado', 400)
+        throw new ServerError(
+            'Ya estas verificado',
+            400)
     }
 
     //Actualizamos al usuario para verificarlo
