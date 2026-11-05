@@ -43,7 +43,6 @@ workspace_router.get(
 workspace_router.get(
     '/',
     authMiddleware,
-    workspaceMiddleware([]),
     async (request, response) => {
         const user_id = request.user._id
         const workspaces = await workspace_repository.getAllWorkspaceByUserId(user_id)

@@ -12,7 +12,6 @@ auth_router.post(
 auth_router.post(
     '/login',
     login,
-    authMiddleware
 )
 
 auth_router.get(
