@@ -45,7 +45,7 @@ workspace_router.get(
     authMiddleware,
     async (request, response) => {
 
-        const workspaces_list = await member_repository.getAllWorkspaceByUserId(user_id)
+        const workspaces_list = await member_repository.getAllWorkspaceByUserId(request.user._id)
         return response.status(200).send({
             ok: true,
             message: "Workspaces obtenidos",
